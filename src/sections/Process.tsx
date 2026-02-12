@@ -41,6 +41,8 @@ const Process: React.FC = () => {
 
   return (
     <Section id="process" background="white">
+
+      {/* HEADING */}
       <div className="text-center mb-16">
         <motion.h2
           className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
@@ -54,6 +56,7 @@ const Process: React.FC = () => {
             Work
           </span>
         </motion.h2>
+
         <motion.p
           className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
           initial={{ opacity: 0, y: 30 }}
@@ -61,75 +64,73 @@ const Process: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Our proven development process ensures successful project delivery 
+          Our proven development process ensures successful project delivery
           with transparency, collaboration, and excellence at every stage.
         </motion.p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      {/* DESKTOP CARDS (HIDDEN ON MOBILE) */}
+      <div className="hidden lg:grid grid-cols-4 gap-8">
         {steps.map((step, index) => {
           const Icon = step.icon;
+
           return (
-            <React.Fragment key={index}>
-              <motion.div
-                className="relative"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-              >
-                {/* Step Number */}
-                <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
-                  {step.number}
+            <motion.div
+              key={index}
+              className="relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+            >
+              {/* Number */}
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
+                {step.number}
+              </div>
+
+              {/* Card */}
+              <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
+                <div className={`w-16 h-16 ${step.bgColor} rounded-2xl flex items-center justify-center mb-6`}>
+                  <Icon className={`w-8 h-8 ${step.color}`} />
                 </div>
 
-                {/* Step Card */}
-                <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
-                  {/* Icon */}
-                  <div className={`w-16 h-16 ${step.bgColor} rounded-2xl flex items-center justify-center mb-6`}>
-                    <Icon className={`w-8 h-8 ${step.color}`} />
-                  </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {step.title}
+                </h3>
 
-                  {/* Content */}
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {step.description}
-                  </p>
+                <p className="text-gray-600 leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+
+              {/* Arrow */}
+              {index < steps.length - 1 && (
+                <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                  <ArrowRight className="w-8 h-8 text-gray-300" />
                 </div>
-
-                {/* Arrow Connector (Desktop) */}
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                    <ArrowRight className="w-8 h-8 text-gray-300" />
-                  </div>
-                )}
-              </motion.div>
-            </React.Fragment>
+              )}
+            </motion.div>
           );
         })}
       </div>
 
-      {/* Process Timeline (Mobile) */}
+      {/* MOBILE TIMELINE (ONLY MOBILE) */}
       <motion.div
         className="lg:hidden mt-12"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.6 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="relative">
-          {/* Timeline Line */}
+
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-          
-          {/* Timeline Items */}
+
           {steps.map((step, index) => (
             <div key={index} className="relative flex items-center mb-8 last:mb-0">
-              {/* Timeline Dot */}
+
               <div className="absolute left-8 w-4 h-4 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-full transform -translate-x-1/2"></div>
-              
-              {/* Timeline Content */}
+
               <div className="ml-16">
                 <h4 className="font-semibold text-gray-900 mb-1">
                   {step.title}
@@ -138,6 +139,7 @@ const Process: React.FC = () => {
                   {step.description}
                 </p>
               </div>
+
             </div>
           ))}
         </div>
@@ -149,7 +151,7 @@ const Process: React.FC = () => {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.8 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-50 to-secondary-50 border border-primary-200 rounded-full">
           <Rocket className="w-5 h-5 text-primary-600" />
@@ -158,6 +160,7 @@ const Process: React.FC = () => {
           </span>
         </div>
       </motion.div>
+
     </Section>
   );
 };

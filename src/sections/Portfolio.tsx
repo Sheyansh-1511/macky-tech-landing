@@ -31,14 +31,22 @@ const Portfolio = () => {
     }
   ];
 
+  const positions = [
+    {x:-360, scale:0.9, z:1},
+    {x:-190, scale:0.95, z:2},
+    {x:0, scale:1, z:5},
+    {x:190, scale:0.95, z:2},
+    {x:360, scale:0.9, z:1},
+  ];
+
   return (
-    <Section id="portfolio" className="py-12 sm:py-16 md:py-20">
+    <Section id="portfolio" className="py-16 md:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
 
           {/* LEFT TEXT */}
-          <div className="-ml-24 md:-ml-36">
+          <div className="md:-ml-36">
             <span className="text-sm tracking-widest text-gray-500 uppercase">
               Discover
             </span>
@@ -56,71 +64,90 @@ const Portfolio = () => {
             </button>
           </div>
 
-          {/* RIGHT STACK */}
-          <div className="lg:w-1/2 relative h-[400px] sm:h-[500px] lg:h-[560px] flex items-center justify-center pr-32">
+          {/* RIGHT SIDE */}
+          <div className="lg:w-1/2 relative">
 
-            {projects.map((p,i)=>{
+            {/* ================= MOBILE CAROUSEL ================= */}
+            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory lg:hidden pb-4">
 
-              const positions = [
-  {x:-360, y:0, scale:0.9, z:1},
-  {x:-180, y:0, scale:0.95, z:2},
-  {x:0, y:0, scale:1, z:5},
-  {x:180, y:0, scale:0.95, z:2},
-  {x:360, y:0, scale:0.9, z:1},
-];
-              const pos = positions[i];
-
-              return (
-                <motion.div
+              {projects.map((p,i)=>(
+                <div
                   key={i}
-                  className="absolute w-80 h-[500px] overflow-hidden shadow-2xl"
-                  style={{
-                    x:pos.x,
-                    scale:pos.scale,
-                    zIndex:pos.z
-                  }}
-                  whileHover={{
-                    scale:1.02,
-                    zIndex:50
-                  }}
-                  transition={{
-                    type:"spring",
-                    stiffness:180,
-                    damping:25
-                  }}
+                  className="min-w-[75%] snap-center relative h-[420px] overflow-hidden shadow-2xl rounded-xl"
                 >
-                  <img
-                    src={p.image}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={p.image} className="w-full h-full object-cover" />
 
                   <div className="absolute inset-0 flex flex-col justify-end">
-                    <div className="bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 sm:p-8 text-white">
+                    <div className="bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 text-white">
+                      <h3 className="text-xl font-semibold">{p.title}</h3>
+                      <p className="text-sm opacity-90 mt-2">{p.description}</p>
 
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-semibold">
-                        {p.title}
-                      </h3>
-
-                      <p className="text-xs sm:text-sm opacity-90 mt-2">
-                        {p.description}
-                      </p>
-
-                      {pos.z===5 && (
-                        <button className="mt-4 bg-white text-black px-6 py-2 rounded-full text-sm">
-                          Explore
-                        </button>
-                      )}
-
+                      <button className="mt-4 bg-white text-black px-6 py-2 rounded-full text-sm">
+                        Explore
+                      </button>
                     </div>
                   </div>
+                </div>
+              ))}
 
-                </motion.div>
-              );
-            })}
+            </div>
+
+            {/* ================= DESKTOP STACK ================= */}
+            <div className="hidden lg:flex relative h-[560px] items-center justify-center">
+
+              {projects.map((p,i)=>{
+                const pos = positions[i];
+
+                return (
+                  <motion.div
+                    key={i}
+                    className="absolute w-80 h-[500px] overflow-hidden shadow-2xl rounded-xl"
+                    style={{
+                      x:pos.x,
+                      scale:pos.scale,
+                      zIndex:pos.z
+                    }}
+                    whileHover={{
+                      scale:1.02,
+                      zIndex:50
+                    }}
+                    transition={{
+                      type:"spring",
+                      stiffness:180,
+                      damping:25
+                    }}
+                  >
+                    <img src={p.image} className="w-full h-full object-cover" />
+
+                    <div className="absolute inset-0 flex flex-col justify-end">
+                      <div className="bg-gradient-to-t from-black/90 via-black/40 to-transparent p-8 text-white">
+
+                        <h3 className="text-2xl font-semibold">
+                          {p.title}
+                        </h3>
+
+                        <p className="text-sm opacity-90 mt-2">
+                          {p.description}
+                        </p>
+
+                        {pos.z===5 && (
+                          <button className="mt-4 bg-white text-black px-6 py-2 rounded-full text-sm">
+                            Explore
+                          </button>
+                        )}
+
+                      </div>
+                    </div>
+
+                  </motion.div>
+                );
+              })}
+
+            </div>
 
           </div>
 
-        </div> {/* ✅ CLOSED MISSING DIV */}
+        </div>
 
       </div>
     </Section>
