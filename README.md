@@ -95,4 +95,4 @@ This project is licensed under the MIT License.
 
 ---
 
-Built with ❤️ by Macky Tech Team
+Built with ❤️ by Shreyansh Pandey
