@@ -93,7 +93,7 @@ const Portfolio = () => {
             </div>
 
             {/* ================= DESKTOP STACK ================= */}
-            <div className="hidden lg:flex relative h-[560px] items-center justify-center">
+            <div className="hidden lg:flex relative h-[560px] items-center justify-center lg:-ml-[7.5rem]">
 
               {projects.map((p,i)=>{
                 const pos = positions[i];
