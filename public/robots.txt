@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://mackytech.com/sitemap.xml
+
+# Block common non-content paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow search engines to crawl the main content
+Allow: /
+Allow: /industries
+Allow: /why-choose-us
+Allow: /portfolio
+Allow: /process
+Allow: /contact
+
+# Crawl delay (optional)
+Crawl-delay: 1
